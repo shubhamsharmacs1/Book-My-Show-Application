@@ -68,16 +68,17 @@ pipeline {
             }
         }
 
-        stage('Docker Build & Push') {
-            steps {
-                withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
-                    sh '''
-                    docker build -t shubhamsharma01/bms:latest bookmyshow-app
-                    docker push shubhamsharma01/bms:latest
-                    '''
-                }
-            }
+      stage('Docker Build & Push') {
+    steps {
+        withDockerRegistry(credentialsId: 'docker', url: '') {
+            sh '''
+            docker build -t shubhamsharma01/bms:latest bookmyshow-app
+            docker push shubhamsharma01/bms:latest
+            '''
         }
+    }
+}
+
 
         stage('Deploy to Container') {
             steps {
